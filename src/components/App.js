@@ -11,6 +11,8 @@ function App() {
     quote: '',
     character: ''
   });
+  // Search state
+  const [search, setSearch] = useState('');
 
 
   // FUNCTIONS
@@ -22,12 +24,19 @@ function App() {
   }, []);
 
 
+  // Search function
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+
   // Add new quote function
   const handleNewQuote = event => (
     setNewQuote({
       ...newQuote,
       [event.target.id]: event.target.value
-    }));
+    })
+  );
 
 
   // Send add new quote function
@@ -41,12 +50,16 @@ function App() {
       quote: '',
       character: ''
     });
-  }
+  };
 
 
 
   // Render quotes function
-  const renderQuotes = quotes.map((item, index) => (
+  const renderQuotes = quotes
+  .filter(item =>
+    item.quote.toLowerCase().includes(search.toLowerCase())
+    )
+  .map((item, index) => (
     <li className='quotes__item' key={index}>
       <span className='quote'>{item.quote}</span> - <span className='character capitalize'>{item.character}</span>
     </li>
@@ -61,6 +74,13 @@ function App() {
       </header>
 
       <main className='main'>
+      <form className='newQuote__form'>
+
+        <label htmlFor="search" className='search__label'>Frase</label>
+        <input type="text" name="search" id="search"  className='search__input' value={search} onChange={handleSearch} />
+
+      </form>
+
         <ul className='quotes'>{renderQuotes}</ul>
 
         <form className='newQuote__form'>
