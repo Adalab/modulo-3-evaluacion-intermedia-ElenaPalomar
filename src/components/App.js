@@ -1,11 +1,11 @@
 import '../styles/App.css';
-import openingQuotes from '../data/quotes.json';
-import { useState } from 'react';
+import getQuotes from '../services/fetchQuotes';
+import { useEffect, useState } from 'react';
 
 function App() {
   // STATES
   // Opening sentece list state
-  const [quotes, setQuotes] = useState(openingQuotes);
+  const [quotes, setQuotes] = useState([]);
   // New quote state
   const [newQuote, setNewQuote] = useState({
     quote: '',
@@ -14,6 +14,14 @@ function App() {
 
 
   // FUNCTIONS
+  // Get data fromAPI function
+  useEffect(() => {
+    getQuotes().then(data => 
+      setQuotes(data)
+    )
+  }, []);
+
+
   // Add new quote function
   const handleNewQuote = event => (
     setNewQuote({
