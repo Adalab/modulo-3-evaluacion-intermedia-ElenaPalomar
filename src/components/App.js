@@ -79,6 +79,16 @@ function App() {
         <label htmlFor="search" className='search__label'>Frase</label>
         <input type="text" name="search" id="search"  className='search__input' value={search} onChange={handleSearch} />
 
+        <select name="searchCharacter" id="searchCharacter">
+          <option value="all">Todos</option>
+          <option value="Ross">Ross</option>
+          <option value="Monica">Monica</option>
+          <option value="Joey">Joey</option>
+          <option value="Phoebe">Phoebe</option>
+          <option value="Chandler">Chandler</option>
+          <option value="Rachel">Rachel</option>
+        </select>
+
       </form>
 
         <ul className='quotes'>{renderQuotes}</ul>
