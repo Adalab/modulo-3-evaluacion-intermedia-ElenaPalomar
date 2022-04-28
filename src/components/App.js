@@ -1,17 +1,18 @@
 import '../styles/App.css';
-import getQuotes from '../services/fetchQuotes';
 import { useEffect, useState } from 'react';
+import getQuotes from '../services/fetchQuotes';
+
 
 function App() {
   // STATES
-  // Opening sentece list state
+  // Quotes list state
   const [quotes, setQuotes] = useState([]);
   // New quote state
   const [newQuote, setNewQuote] = useState({
     quote: '',
     character: ''
   });
-  // Search state
+  // Search state - filter by name
   const [search, setSearch] = useState('');
 
 
