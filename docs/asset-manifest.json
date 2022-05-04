@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "./static/css/main.6ab90179.css",
-    "main.js": "./static/js/main.937d640c.js",
+    "main.css": "./static/css/main.28da108d.css",
+    "main.js": "./static/js/main.17f3095f.js",
+    "static/media/641478.JPEG": "./static/media/641478.5d097a708eef6181b419.JPEG",
+    "static/media/Gabriel-Weiss-Friend-Font.TTF": "./static/media/Gabriel-Weiss-Friend-Font.2eb88da161a9350878b4.TTF",
     "index.html": "./index.html",
-    "main.6ab90179.css.map": "./static/css/main.6ab90179.css.map",
-    "main.937d640c.js.map": "./static/js/main.937d640c.js.map"
+    "main.28da108d.css.map": "./static/css/main.28da108d.css.map",
+    "main.17f3095f.js.map": "./static/js/main.17f3095f.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ab90179.css",
-    "static/js/main.937d640c.js"
+    "static/css/main.28da108d.css",
+    "static/js/main.17f3095f.js"
   ]
 }
