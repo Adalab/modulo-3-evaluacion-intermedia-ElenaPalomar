@@ -1,33 +1,45 @@
-import '../styles/App.css';
+import '../styles/App.scss';
 import { useEffect, useState } from 'react';
 import getQuotes from '../services/fetchQuotes';
+import LocalStorage from '../services/localStorage';
 
 
 function App() {
   // STATES
   // Quotes list state
-  const [quotes, setQuotes] = useState([]);
+  const [quotes, setQuotes] = useState(LocalStorage.get("quotes",[]));
   // New quote state
   const [newQuote, setNewQuote] = useState({
     quote: '',
     character: ''
   });
-  // Search state - filter by name
-  const [search, setSearch] = useState('');
+  // Filter state - filter by name
+  const [filterName, setFilterName] = useState('');
+  // Filter by character state - filter by character
+  const [filterCharacter, setFilterCharacter] = useState('all');
 
 
   // FUNCTIONS
   // Get data fromAPI function
   useEffect(() => {
-    getQuotes().then(data => 
-      setQuotes(data)
-    )
+    if (quotes.length === 0) {
+      getQuotes().then(data => {
+        LocalStorage.set("quotes", data);
+        setQuotes(data);
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
-  // Search function
-  const handleSearch = (event) => {
-    setSearch(event.target.value);
+  // Filter by name function
+  function handleFilterName(event) {
+    setFilterName(event.target.value);
+  }
+
+  // Filter by character function
+  const handleFilterCharacter = (event) => {
+    setFilterCharacter(event.target.value);
   };
 
 
@@ -43,10 +55,12 @@ function App() {
   // Send add new quote function
   const handleClickNewQuote = event => {
     event.preventDefault();
-    setQuotes([
+    const newQuotes = [
       ...quotes,
       newQuote
-    ]);
+    ];
+    LocalStorage.set("quotes", newQuotes);
+    setQuotes(newQuotes);
     setNewQuote({
       quote: '',
       character: ''
@@ -57,8 +71,19 @@ function App() {
 
   // Render quotes function
   const renderQuotes = quotes
+  .filter(item => {
+
+    if(filterCharacter === 'all') {
+      return true;
+    } else if (filterCharacter === item.character) {
+      return true;
+    } else {
+      return false;
+    }
+
+  })
   .filter(item =>
-    item.quote.toLowerCase().includes(search.toLowerCase())
+    item.quote.toLowerCase().includes(filterName.toLowerCase())
     )
   .map((item, index) => (
     <li className='quotes__item' key={index}>
@@ -71,30 +96,46 @@ function App() {
     <div>
 
       <header className='header'>
-        <h1 className='header__title capitalize'>Frases de friends</h1>
+        <h1 className='header__title'>Frases de 
+          <p className='header__title--special uppercase'>
+            f
+            <span className="dotRed">•</span>
+            r
+            <span className="dotYellow">•</span>
+            i
+            <span className="dotBlue">•</span>
+            e
+            <span className="dotRed">•</span>
+            n
+            <span className="dotYellow">•</span>
+            d
+            <span className="dotBlue">•</span>
+            s
+          </p>
+        </h1>
       </header>
 
       <main className='main'>
-      <form className='newQuote__form'>
+        <form className='formFilter'>
 
-        <label htmlFor="search" className='search__label'>Frase</label>
-        <input type="text" name="search" id="search"  className='search__input' value={search} onChange={handleSearch} />
+          <label htmlFor="search" className='search__label'>Frase</label>
+          <input type="text" name="search" id="search"  className='search__input' value={filterName} onChange={handleFilterName} />
 
-        <select name="searchCharacter" id="searchCharacter">
-          <option value="all">Todos</option>
-          <option value="Ross">Ross</option>
-          <option value="Monica">Monica</option>
-          <option value="Joey">Joey</option>
-          <option value="Phoebe">Phoebe</option>
-          <option value="Chandler">Chandler</option>
-          <option value="Rachel">Rachel</option>
-        </select>
+          <select name="filterCharacter" id="filterCharacter" value={filterCharacter} onChange={handleFilterCharacter}>
+            <option value="all">Todos</option>
+            <option value="Ross">Ross</option>
+            <option value="Monica">Monica</option>
+            <option value="Joey">Joey</option>
+            <option value="Phoebe">Phoebe</option>
+            <option value="Chandler">Chandler</option>
+            <option value="Rachel">Rachel</option>
+          </select>
 
-      </form>
+        </form>
 
         <ul className='quotes'>{renderQuotes}</ul>
 
-        <form className='newQuote__form'>
+        <form className='formNewQuote'>
 
           <label htmlFor="quote" className='newQuote__label'>Frase</label>
           <input type="text" name="quote" id="quote"  className='newQuote__input' value={newQuote.quote} onChange={handleNewQuote} />
@@ -102,7 +143,7 @@ function App() {
           <label htmlFor="character" className='newQuote__label'>Personaje</label>
           <input type="text" name="character" id="character" className='newQuote__input' value={newQuote.character} onChange={handleNewQuote} />
 
-          <input type="submit" className='newQuote__button' valur="Añadir" onClick={handleClickNewQuote} />
+          <button className='newQuote__button' onClick={handleClickNewQuote}>Añadir nueva frase</button>
 
         </form>
       </main>
