@@ -51,10 +51,19 @@ function App() {
     })
   );
 
+  // Validation for add a new quote
+  const validationAddNewQuote = () => {
+    if(newQuote.quote === '' || newQuote.character === '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   // Send add new quote function
   const handleClickNewQuote = event => {
     event.preventDefault();
+    validationAddNewQuote();
     const newQuotes = [
       ...quotes,
       newQuote
@@ -133,7 +142,7 @@ function App() {
 
         </form>
 
-        <ul className='quotes'>{renderQuotes}</ul>
+        <ul className='quotes'>{renderQuotes.length === 0 ? <li className='quote__item--error'>No hay ninguna frase que coincida con tus términos de búsqueda 😥</li> : renderQuotes}</ul>
 
         <form className='formNewQuote'>
 
@@ -143,10 +152,13 @@ function App() {
           <label htmlFor="character" className='newQuote__label'>Personaje</label>
           <input type="text" name="character" id="character" className='newQuote__input' value={newQuote.character} onChange={handleNewQuote} />
 
-          <button className='newQuote__button' onClick={handleClickNewQuote}>Añadir nueva frase</button>
+          <button className='newQuote__button' onClick={handleClickNewQuote} disabled={validationAddNewQuote() === false}>Añadir nueva frase</button>
 
         </form>
+
       </main>
+
+      <div className="containerBackground"></div>
 
     </div>
   );

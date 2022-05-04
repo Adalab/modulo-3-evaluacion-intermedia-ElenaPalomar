@@ -1,16 +1,17 @@
 .header {
-  margin: 30px 0;
+  margin: 20px 0;
 
   display: flex;
   justify-content: center;
 
   &__title {
+    font-family: $fontFriends;
+    font-size: 20px;
     text-align: center;
 
     &--special {
       margin-top: 10px;
 
-      font-family: $fontFriends;
       font-size: 25px;
       letter-spacing: 8px;
 
