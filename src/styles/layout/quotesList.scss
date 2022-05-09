@@ -1,6 +1,20 @@
 .quotes {
   margin: 20px;
 
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+
+  @media all and (min-width: 768px) {
+    grid-template-columns: repeat(2, auto);
+    column-gap: 10px;
+  }
+
+  @media all and (min-width: 1200px) {
+    grid-template-columns: repeat(3, auto);
+    column-gap: 20px;
+  }
+
   &__item {
     background-color: $colorBackgroundItem;
     border: 1.8px $colorBorderItem solid;
@@ -10,9 +24,23 @@
       5px 3px 11px $colorShadowBlack, 
       -5px -4px 15px $colorWhite;
 
+    width: 100%;
+    max-width: 420px;
+
     margin: 8px 0;
-    padding: 8px;
+    padding: 10px;
 
     text-align: justify;
+  }
+
+  .quote {
+    font-family: $fontQuotes;
+    font-size: 18px;
+  }
+
+  .character {
+    font-family: $fontCharacter;
+    font-size: 20px;
+    color: $colorShadowBlack;
   }
 }

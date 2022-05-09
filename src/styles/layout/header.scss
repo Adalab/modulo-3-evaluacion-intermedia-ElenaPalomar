@@ -1,5 +1,5 @@
 .header {
-  margin: 20px 0;
+  margin: 20px 0 30px;
 
   display: flex;
   justify-content: center;
@@ -9,11 +9,20 @@
     font-size: 20px;
     text-align: center;
 
+    @media all and (min-width: 480px) {
+      font-size: 30px;
+    }
+
     &--special {
       margin-top: 10px;
 
-      font-size: 25px;
+      font-size: 23px;
       letter-spacing: 8px;
+
+      @media all and (min-width: 480px) {
+        font-size: 40px;
+      }
+
 
       .dotRed {
         color: $colorRedBasic;

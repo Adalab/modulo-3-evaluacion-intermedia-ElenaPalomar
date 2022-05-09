@@ -127,10 +127,10 @@ function App() {
       <main className='main'>
         <form className='formFilter'>
 
-          <label htmlFor="search" className='search__label'>Frase</label>
+          <label htmlFor="search" className='search__label'>Busca la frase de tu protagonista favorito</label>
           <input type="text" name="search" id="search"  className='search__input' value={filterName} onChange={handleFilterName} />
 
-          <select name="filterCharacter" id="filterCharacter" value={filterCharacter} onChange={handleFilterCharacter}>
+          <select className='select' name="filterCharacter" id="filterCharacter" value={filterCharacter} onChange={handleFilterCharacter}>
             <option value="all">Todos</option>
             <option value="Ross">Ross</option>
             <option value="Monica">Monica</option>
@@ -145,6 +145,8 @@ function App() {
         <ul className='quotes'>{renderQuotes.length === 0 ? <li className='quote__item--error'>No hay ninguna frase que coincida con tus términos de búsqueda 😥</li> : renderQuotes}</ul>
 
         <form className='formNewQuote'>
+
+          <label className="formNewQuote__title">Añade una nueva frase</label>
 
           <label htmlFor="quote" className='newQuote__label'>Frase</label>
           <input type="text" name="quote" id="quote"  className='newQuote__input' value={newQuote.quote} onChange={handleNewQuote} />

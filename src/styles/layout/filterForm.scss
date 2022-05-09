@@ -1,0 +1,64 @@
+.formFilter {
+  margin: 20px;
+
+  text-align: center;
+}
+
+.search__label {
+  margin: 10px;
+
+  font-family: $fontTitle;
+  text-align: center;
+
+  display: block;
+
+  @media all and (min-width: 480px) {
+    font-size: 20px;
+  }
+
+}
+
+.search__input {
+  border: 3px ridge $colorShadowBlack;
+
+  height: 30px;
+  width: 150px;
+
+  margin: 0 8px;
+  padding: 5px;
+
+  font-family: $fontButton;
+  font-size: 15px;
+
+  @media all and (min-width: 480px) {
+    height: 35px;
+    width: 250px;
+
+    padding: 10px;
+
+    font-size: 18px;
+  }
+}
+
+.select {
+  background-color: $colorBackgroundItem;
+  border: 3px groove $colorShadowBlack;
+  border-radius: 5px;
+
+  height: 30px;
+
+  margin: 0 8px;
+
+  font-family: $fontButton;
+  font-size: 15px;
+
+	cursor: pointer;
+
+  @media all and (min-width: 480px) {
+    height: 35px;
+
+    padding: 0 10px;
+
+    font-size: 18px;
+  }
+}
